@@ -37,39 +37,39 @@ namespace WEB_FirstMissingPositive
                 Console.ReadLine();
                 Console.Clear();
             } while (true);
+        }
 
-            int FirstMissingPositive(int[] arr)
+        static int FirstMissingPositive(int[] arr)
+        {
+            int missing = 1;
+            int temp = 0;
+            for (int i = 0; i < arr.Length - 1; i++)
             {
-                int missing = 1;
-                int temp = 0;
-                for (int i = 0; i < arr.Length - 1; i++)
+                for (int j = i + 1; j < arr.Length; j++)
                 {
-                    for (int j = i+1; j < arr.Length; j++)
+                    if (arr[j] < arr[i])
                     {
-                        if (arr[j] < arr[i])
-                        {
-                            temp = arr[i];
-                            arr[i] = arr[j];
-                            arr[j] = temp;
-                        }
+                        temp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = temp;
                     }
                 }
-                for (int i = 0; i < arr.Length; i++)
-                {
-                    if (arr[i] >0)
-                    {
-                        if (arr[i]> missing)
-                        {
-                            return missing;
-                        }
-                        else
-                        {
-                            missing = arr[i] + 1;
-                        }
-                    }
-                }
-                return missing;
             }
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] > 0)
+                {
+                    if (arr[i] > missing)
+                    {
+                        return missing;
+                    }
+                    else
+                    {
+                        missing = arr[i] + 1;
+                    }
+                }
+            }
+            return missing;
         }
     }
 }
